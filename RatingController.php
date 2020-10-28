@@ -18,13 +18,17 @@ class RatingController extends Controller
         return response()->json(['created'], 201);
     }
 
-    public function index(IndexRequest $request) {
+    public function index(Rating $rating,IndexRequest $request) {
         index::withoutWrapping();
+
         if (!empty($request['filter'])) {
             $result = Rating::whereRating($request['filter'])->get();
         } else {
             $result = Rating::all()->sortByDesc('rating');
         }
-        return response()->json(new index($result), 200);
+
+        return response()->json(
+            ($result->count() !== 0) ? new index($result) : [], 200
+        );
     }
 }
