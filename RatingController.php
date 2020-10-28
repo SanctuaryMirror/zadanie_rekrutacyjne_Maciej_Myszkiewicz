@@ -15,7 +15,7 @@ class RatingController extends Controller
             'rating' => $request['rating']
         ]);
 
-        return response()->json(['created'], 201);
+        return response()->json('created', 201);
     }
 
     public function index(Rating $rating,IndexRequest $request) {
