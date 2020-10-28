@@ -9,10 +9,6 @@ use App\Http\Resources\RatingCollection as index;
 
 class RatingController extends Controller
 {
-    public function __construct() {
-        index::withoutWrapping();
-    }
-
     public function store(PostRequest $request) {
         Rating::Create([
             'email' => $request['email'],
@@ -23,6 +19,7 @@ class RatingController extends Controller
     }
 
     public function index(IndexRequest $request) {
+        index::withoutWrapping();
         if (!empty($request['filter'])) {
             $result = Rating::whereRating($request['filter'])->get();
         } else {
