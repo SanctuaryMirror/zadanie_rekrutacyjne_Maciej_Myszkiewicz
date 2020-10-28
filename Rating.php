@@ -13,4 +13,6 @@ class Rating extends Model
         'email',
         'rating'
     ];
+
+    public $timestamps = true;
 }
