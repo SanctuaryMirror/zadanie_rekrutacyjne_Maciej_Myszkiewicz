@@ -16,16 +16,14 @@ class RatingController extends Controller
     public function store(PostRequest $request) {
         Rating::Create([
             'email' => $request['email'],
-            'rating' => $request['rating'],
-            'created_at' => now(),
-            'updated_at' => now()
+            'rating' => $request['rating']
         ]);
 
         return response()->json(['created'], 201);
     }
 
     public function index(IndexRequest $request) {
-        if (!empty($request['filter'])){
+        if (!empty($request['filter'])) {
             $result = Rating::whereRating($request['filter'])->get();
         } else {
             $result = Rating::all()->sortByDesc('rating');
